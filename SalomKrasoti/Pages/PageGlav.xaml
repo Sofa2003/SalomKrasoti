@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SalomKrasoti.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1005.537"
       Title="PageGlav">
 
 
@@ -52,6 +52,10 @@
                         </Style>
                     </TextBlock.Style>
                 </TextBlock>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Button x:Name="btnRed" Content="Редактировать" Command="{Binding EditCommand}" CommandParameter="{Binding}" Margin="2" Click="btnRed_Click" />
+                                <Button x:Name="btnDel"   Content="Удалить" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" Margin="2" Click="btnDel_Click_1"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -71,12 +75,14 @@
 
                 <ComboBox x:Name ="SortBox"  VerticalAlignment="Center"  Height="41" SelectionChanged="SortBox_SelectionChanged" Width="163"/>
                 <Button x:Name = "btnadnim" Width="100" Content="режим админа" Click="btnadnim_Click"/>
+                <Button x:Name = "btncreate" Width="100" Content="Добавить услугу" Click="btncreate_Click"/>
+                <Button x:Name = "btncreatclient" Width="117" Content="Записать на услугу" Click="btncreatclient_Click"/>
             </StackPanel>
 
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label x:Name="RecordCountLabel" Content="0 из 0" ></Label>
+                <Label x:Name="RecordCountLabel" Content="0 из 0" FontSize="20"></Label>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="10"/>
         </Grid>

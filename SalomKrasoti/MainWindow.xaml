@@ -8,5 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Frame x:Name="frame" Height="auto" Width="auto" LoadCompleted="frame_LoadCompleted" Grid.ColumnSpan="2" Margin="0,30,0,30" Grid.RowSpan="3" NavigationUIVisibility="Hidden"/>
+        <Image Source="C:\Users\user\source\repos\SalomKrasoti\SalomKrasoti\Logo\beauty_logo.ico" HorizontalAlignment="Left" Height="29" Margin="0,1,0,0" VerticalAlignment="Top" Width="36"/>
     </Grid>
 </Window>

@@ -9,6 +9,63 @@
       Title="PageEdit">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" VerticalAlignment="Center" Margin="40">
+                <Image x:Name="ImageService" Height="150" Width="150"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                <Button x:Name="btnDownloadImage" Content="Выбрать фотографию" Margin="10" Height="40" Click="btnBase_OnClickDownloadImage" Background="#FFFFFFE1"/>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="gridInfoClient" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="lblID" Grid.Row="0" Grid.Column="0" Text="ID:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox   x:Name="tbID" IsReadOnly="True"  Width="100" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+
+            <TextBlock Text="Наименование услуги:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox x:Name="tbName" Width="100" Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+            <TextBlock Text="Стоимость" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox  x:Name="tbCost" Width="100" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+            <TextBlock Text="Длительность" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox  x:Name="tbSecond" Width="100" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+            <TextBlock Text="Описание*:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox  x:Name="tbdescription" Width="100" Grid.Row="4" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+            <TextBlock Text="Скидка:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox  x:Name="tbDiscount" Width="100" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="btnEdit" Content="Сохранить изменение" Height="40" Click="btnEdit_Click" Background="#FFFFFFE1" Width="282"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

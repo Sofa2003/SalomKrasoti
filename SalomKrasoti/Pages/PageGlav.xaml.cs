@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -137,6 +138,51 @@ namespace SalomKrasoti.Pages
             Frame _frame = new Frame();
             Admin admin = new Admin(_frame);
             admin.ShowDialog();
+        }
+
+        private void btncreate_Click(object sender, RoutedEventArgs e)
+        {
+            PageEdit create = new PageEdit(null);
+            NavigationService.Navigate(create);
+        }
+
+        private void btnRed_Click(object sender, RoutedEventArgs e)
+        {
+            PageEdit pageEdit = new PageEdit((Service)serviceGrid.SelectedItem);
+            NavigationService.Navigate(pageEdit);
+        }
+
+        private void btnDel_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (serviceGrid.SelectedItems.Count > 0)
+            {
+                Service services = serviceGrid.SelectedItems[0] as Service;
+
+                if (services != null)
+                {
+                    var context = helper.GetContext();
+
+                    // Удаляем клиента
+                    context.Service.Remove(services);
+                    context.SaveChanges();
+
+                    // Обновляем коллекцию в интерфейсе
+                    var serviceList = serviceGrid.ItemsSource as ObservableCollection<Service>;
+                    if (serviceList != null)
+                    {
+                        serviceList.Remove(services); // Удаляем клиента из коллекции
+                    }
+
+                    MessageBox.Show("Удаление успешно выполнено");
+                    Load();
+                }
+            }
+        }
+
+        private void btncreatclient_Click(object sender, RoutedEventArgs e)
+        {
+            PageClient pageEdit = new PageClient((Service)serviceGrid.SelectedItem);
+            NavigationService.Navigate(pageEdit);
         }
     }
 }
