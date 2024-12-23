@@ -181,8 +181,17 @@ namespace SalomKrasoti.Pages
 
         private void btncreatclient_Click(object sender, RoutedEventArgs e)
         {
-            PageClient pageEdit = new PageClient((Service)serviceGrid.SelectedItem);
-            NavigationService.Navigate(pageEdit);
+            Service service = serviceGrid.SelectedItem as Service;
+            if (service != null)
+            {
+                PageClient pageEdit = new PageClient((Service)serviceGrid.SelectedItem);
+                NavigationService.Navigate(pageEdit);
+            }
+            else
+            {
+                MessageBox.Show("Выберите услугу");
+            }
+            
         }
     }
 }
