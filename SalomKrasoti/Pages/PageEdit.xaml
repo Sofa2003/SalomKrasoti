@@ -67,5 +67,23 @@
                 <Button x:Name="btnEdit" Content="Сохранить изменение" Height="40" Click="btnEdit_Click" Background="#FFFFFFE1" Width="282"/>
             </StackPanel>
         </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
+                
+                <Button  x:Name="btnvixod" Content="Выход" Height="40" Click="btnvixod_Click" Background="#FFFFFFE1" Width="282"/>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Page>

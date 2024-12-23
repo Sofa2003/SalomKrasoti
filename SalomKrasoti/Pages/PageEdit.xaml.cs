@@ -164,5 +164,11 @@ namespace SalomKrasoti.Pages
             }
 
         }
+
+        private void btnvixod_Click(object sender, RoutedEventArgs e)
+        {
+            PageGlav pageGlav = new PageGlav();
+            NavigationService.Navigate(pageGlav);
+        }
     }
 }

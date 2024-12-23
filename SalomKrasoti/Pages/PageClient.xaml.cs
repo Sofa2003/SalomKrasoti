@@ -30,6 +30,11 @@ namespace SalomKrasoti.Pages
         {
             InitializeComponent();
             listclient = helper.GetContext().Client.ToList();
+            try 
+            { 
+
+            }
+            catch (Exception ex) { }
             tbServiceName.Text = service.Title;
             tbServiceDuration.Text = ($"{ service.DurationInSeconds} минут").ToString();
 
@@ -63,6 +68,12 @@ namespace SalomKrasoti.Pages
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void btnvixod_Click(object sender, RoutedEventArgs e)
+        {
+            PageGlav pageGlav = new PageGlav(); 
+            NavigationService.Navigate(pageGlav);   
         }
     }
 }

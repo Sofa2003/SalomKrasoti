@@ -25,6 +25,7 @@
             <TextBox x:Name="tbStartTime"  />
 
             <Button Content="Сохранить запись" Click="btnSave_Click"/>
+            <Button  x:Name="btnvixod" Content="Выйти" Click="btnvixod_Click"/>
         </StackPanel>
     </Grid>
 </Page>

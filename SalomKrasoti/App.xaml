@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:SalomKrasoti"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#ff4a6d"/>
+        </Style>
+
     </Application.Resources>
 </Application>
