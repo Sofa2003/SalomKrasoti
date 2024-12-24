@@ -22,7 +22,7 @@
             <DatePicker x:Name="dpServiceDate" SelectedDate="{Binding SelectedDate, Mode=TwoWay}"/>
 
             <TextBlock Text="Время начала (чч:мм):" FontWeight="Bold"/>
-            <TextBox x:Name="tbStartTime"  />
+            <TextBox x:Name="tbStartTime" TextChanged="tbStartTime_TextChanged"  />
 
             <Button Content="Сохранить запись" Click="btnSave_Click"/>
             <Button  x:Name="btnvixod" Content="Выйти" Click="btnvixod_Click"/>

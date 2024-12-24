@@ -26,7 +26,7 @@
                 <Image x:Name="ImageService" Height="150" Width="150"/>
             </StackPanel>
             <StackPanel Grid.Row="2" VerticalAlignment="Center">
-                <Button x:Name="btnDownloadImage" Content="Выбрать фотографию" Margin="10" Height="40" Click="btnBase_OnClickDownloadImage" Background="#FFFFFFE1"/>
+                <Button x:Name="btnDownloadImage" Content="Выбрать фотографию" Margin="10" Height="40" Click="btnBase_OnClickDownloadImage" />
             </StackPanel>
         </Grid>
         <Grid x:Name="gridInfoClient" Grid.Column="1">
@@ -64,7 +64,7 @@
             <TextBlock Text="Скидка:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <TextBox  x:Name="tbDiscount" Width="100" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
             <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button x:Name="btnEdit" Content="Сохранить изменение" Height="40" Click="btnEdit_Click" Background="#FFFFFFE1" Width="282"/>
+                <Button x:Name="btnEdit" Content="Сохранить изменение" Height="40" Click="btnEdit_Click"  Width="282"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="2">
@@ -81,7 +81,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center">
                 
-                <Button  x:Name="btnvixod" Content="Выход" Height="40" Click="btnvixod_Click" Background="#FFFFFFE1" Width="282"/>
+                <Button  x:Name="btnvixod" Content="Выход" Height="40" Click="btnvixod_Click"  Width="282"/>
             </StackPanel>
         </Grid>
 

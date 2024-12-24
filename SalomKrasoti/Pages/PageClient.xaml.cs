@@ -43,7 +43,7 @@ namespace SalomKrasoti.Pages
 
         public void Load()
         {
-            // Здесь можно загрузить дополнительные данные о клиенте, если нужно
+           
         }
 
         private void SelectedCombox(object sender, SelectionChangedEventArgs e)
@@ -102,6 +102,11 @@ namespace SalomKrasoti.Pages
         {
             PageGlav pageGlav = new PageGlav();
             NavigationService.Navigate(pageGlav);
+        }
+
+        private void tbStartTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
