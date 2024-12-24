@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,11 +40,13 @@ namespace SalomKrasoti.Pages
             cbClients.ItemsSource = listclient;
             cbClients.DisplayMemberPath = "FullName"; // Указываем путь к свойству FullName
             cbClients.SelectedValuePath = "ID"; // Указываем путь к ID (если нужно)
+            tbStartTime.PreviewTextInput += tbStartTime_PreviewTextInput;
+            dpServiceDate.PreviewTextInput += dpServiceDate_PreviewTextInput;
         }
 
         public void Load()
         {
-           
+
         }
 
         private void SelectedCombox(object sender, SelectionChangedEventArgs e)
@@ -56,13 +59,19 @@ namespace SalomKrasoti.Pages
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
+        {   
+            if (cbClients.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите клиента");
+                return;
+            }
             // Валидация ввода времени
             if (!TimeSpan.TryParse(tbStartTime.Text, out TimeSpan startTime))
             {
                 MessageBox.Show("Введите корректное время в формате ЧЧ:ММ.");
                 return;
             }
+           
 
             // Валидация ввода даты
             if (dpServiceDate.SelectedDate == null)
@@ -100,13 +109,25 @@ namespace SalomKrasoti.Pages
 
         private void btnvixod_Click(object sender, RoutedEventArgs e)
         {
-            PageGlav pageGlav = new PageGlav();
+            PageGlav pageGlav = new PageGlav(1);
             NavigationService.Navigate(pageGlav);
         }
 
         private void tbStartTime_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void dpServiceDate_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9:]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void tbStartTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9:]");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

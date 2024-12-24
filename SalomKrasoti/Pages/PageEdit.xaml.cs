@@ -27,13 +27,17 @@ namespace SalomKrasoti.Pages
         Service sr = new Service();
         private Service currentService;
         private string selectedImagePath;
+        public string seldnull = "";
         public PageEdit(Service service)
         {
             InitializeComponent();
             currentService = service;
+            
 
             if (service != null)
             {
+                tbID.Visibility = Visibility.Visible;
+                tbID.Text = service.ID.ToString();
                 // Заполнение полей данными услуги
                 tbName.Text = service.Title;
                 tbCost.Text = service.Cost.ToString();
@@ -48,6 +52,7 @@ namespace SalomKrasoti.Pages
             }
             else
             {
+                lblID.Visibility = Visibility.Hidden;
                 // Если это новая услуга, скрываем поле ID
                 tbID.Visibility = Visibility.Collapsed;
             }
@@ -92,15 +97,33 @@ namespace SalomKrasoti.Pages
 
                 if (!string.IsNullOrEmpty(selectedImagePath))
                 {
-                    currentService.MainImagePath = "/Услуги салона красоты/" + selectedImagePath;
-                }
-                else
-                {
-                    currentService.MainImagePath = null; // Если изображение не выбрано
-                }
+                    if (!currentService.MainImagePath.StartsWith("/Услуги салона красоты/"))
+                    {
+                        // Если не начинается, добавляем префикс
+                        currentService.MainImagePath = "/Услуги салона красоты/" + selectedImagePath;
+                        MessageBox.Show("Типо нет: " + currentService.MainImagePath);
+                    }
+                    else
+                    {
+                        // Если уже начинается с нужной строки, проверяем, не дублируем ли мы путь
+                        string imageFileName = System.IO.Path.GetFileName(selectedImagePath);
+                        string existingFileName = System.IO.Path.GetFileName(currentService.MainImagePath);
 
+                        if (existingFileName != imageFileName)
+                        {
+                            // Добавляем только если имена файлов различаются
+                            currentService.MainImagePath += selectedImagePath; // Или другой способ обработки
+                        }
+                        else
+                        {
+                            //MessageBox.Show("Изображение уже добавлено: " + currentService.MainImagePath);
+                        }
+                    }
+                }
                 // Обновляем существующую запись
                 helper.GetContext().SaveChanges();
+                MessageBox.Show("Услуга успешно отредактирована");
+
             }
             else
             {
@@ -114,13 +137,15 @@ namespace SalomKrasoti.Pages
                     Discount = double.TryParse(tbDiscount.Text, out double newDiscount) ? newDiscount : 0,
                     MainImagePath = !string.IsNullOrEmpty(selectedImagePath) ? "/Услуги салона красоты/" + selectedImagePath : null
                 };
-
+                
                 helper.GetContext().Service.Add(newService);
                 helper.GetContext().SaveChanges();
+                MessageBox.Show("Услуга успешно сохранена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.Navigate(new PageGlav(1));
             }
 
-            MessageBox.Show("Услуга успешно сохранена!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-            NavigationService.Navigate(new PageGlav());
+            
+            
         }
 
 
@@ -167,7 +192,7 @@ namespace SalomKrasoti.Pages
 
         private void btnvixod_Click(object sender, RoutedEventArgs e)
         {
-            PageGlav pageGlav = new PageGlav();
+            PageGlav pageGlav = new PageGlav(1);
             NavigationService.Navigate(pageGlav);
         }
     }

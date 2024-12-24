@@ -51,11 +51,10 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Resources>
-                        <Run Text="{Binding Cost, StringFormat='{}{0} рублей '}" Style="{StaticResource StrikethroughStyle}"/>
-                        <Run Text="" /> 
-                        <Run Text="{Binding DurationInSeconds, StringFormat='{}{0} минут'}" />
+                     <Run Text="{Binding Cost, StringFormat='{}{0} рублей '}" Style="{StaticResource StrikethroughStyle}"/>
+                     <Run Text="" /> 
+                     <Run Text="{Binding DurationInSeconds, StringFormat='{}{0} минут'}" />
                             </TextBlock>
-
                             <TextBlock x:Name="tbDiscoint" HorizontalAlignment="Left" FontWeight="Bold">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
@@ -106,13 +105,12 @@
             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <TextBox x:Name="SearchBox"  Width="295" TextChanged="SearchBox_TextChanged" ></TextBox>
                 <ComboBox x:Name="DiscountBox" Width="97" SelectionChanged="DiscountBox_SelectionChanged"/>
-
                 <ComboBox x:Name ="SortBox"  VerticalAlignment="Center"  Height="41" SelectionChanged="SortBox_SelectionChanged" Width="163"/>
-                <Button x:Name = "btnadnim" Width="100" Content="режим админа" Click="btnadnim_Click"/>
+                <Button x:Name = "btnadnim" Width="145" Content="Режим администратора" Click="btnadnim_Click"/>
                 <Button x:Name = "btncreate" Width="100" Content="Добавить услугу" Click="btncreate_Click"/>
                 <Button x:Name = "btncreatclient" Width="117" Content="Записать на услугу" Click="btncreatclient_Click"/>
+                <Button x:Name = "btnUpcoming" Width="117" Content="Ближайшие записи" Click="btnUpcoming_Click"/>
             </StackPanel>
-
         </Grid>
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -123,6 +121,5 @@
         <Grid Grid.Row="3">
 
         </Grid>
-
     </Grid>
 </Page>

@@ -1,5 +1,4 @@
-﻿using SalomKrasoti.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,35 +16,27 @@ using System.Windows.Shapes;
 namespace SalomKrasoti.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для Admin.xaml
+    /// Логика взаимодействия для PageAdmin.xaml
     /// </summary>
-    public partial class Admin : Window
+    public partial class PageAdmin : Page
     {
-        private Frame _frame;
-        public Admin(Frame frame)
+        public PageAdmin()
         {
-
             InitializeComponent();
-            _frame = frame;
-           
-            
         }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string code = TextBoxAdmin.Text; // Получаем текст из TextBox
-
-            if (code == "0000") // Проверяем код
+            string code = TextBoxAdmin.Text;
+            if (code == "0000")
             {
-                _frame.Navigate(new PageGlav());
-                this.Close();
+                MessageBox.Show("Вы успешно переходите на режим администратора");
+                NavigationService.Navigate(new PageGlav(1));
             }
             else
             {
                 MessageBox.Show("Неверный код.");
             }
-            
+
         }
     }
-    
 }

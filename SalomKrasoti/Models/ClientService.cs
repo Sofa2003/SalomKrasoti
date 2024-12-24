@@ -31,6 +31,17 @@ namespace SalomKrasoti.Models
     
         public virtual Client Client { get; set; }
         public virtual Service Service { get; set; }
+        public virtual String RemainingTime
+        {
+            get
+            {
+                TimeSpan remaining = StartTime - DateTime.Now;
+                int hours = (int)remaining.TotalHours;
+                int minutes = remaining.Minutes;
+                return $"{hours} ч {minutes} мин";
+            }
+            set { }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocumentByService> DocumentByService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

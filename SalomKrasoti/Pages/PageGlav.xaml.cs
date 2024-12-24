@@ -27,9 +27,13 @@ namespace SalomKrasoti.Pages
     {
         private List<Service> listspisokservice;
         private string searchQuery = "";
-        public PageGlav(/*Frame frame*/)
+        private int adminCod;
+        public PageGlav(int cod)
         {
             InitializeComponent();
+            btncreatclient.Visibility = Visibility.Hidden;
+            btncreate.Visibility = Visibility.Hidden;
+            btnUpcoming.Visibility = Visibility.Hidden;
             listspisokservice = helper.GetContext().Service.ToList();
             SortBox.Items.Add("Все");
             SortBox.Items.Add("0 - 5%");
@@ -42,8 +46,14 @@ namespace SalomKrasoti.Pages
             DiscountBox.Items.Add("По возрастанию");
             DiscountBox.Items.Add("По убыванию");
             DiscountBox.SelectedIndex = 0;
-
+            adminCod = cod;
             Load();
+            if (adminCod == 1)
+            {
+                btncreatclient.Visibility = Visibility.Visible;
+                btncreate.Visibility = Visibility.Visible;
+                btnUpcoming.Visibility = Visibility.Visible;
+            }
         }
         public void Load()
         {
@@ -64,7 +74,7 @@ namespace SalomKrasoti.Pages
             switch (SortBox.SelectedItem.ToString())
             {
                 case "0 - 5%":
-                    serviceQuery = serviceQuery.Where(s => s.Discount == null || (s.Discount >= null && s.Discount < 5));
+                    serviceQuery = serviceQuery.Where(s => s.Discount == null || (s.Discount >= 0 && s.Discount < 5));
                     break;
                 case "5 - 15%":
                     serviceQuery = serviceQuery.Where(s => s.Discount >= 5 && s.Discount < 15);
@@ -117,11 +127,6 @@ namespace SalomKrasoti.Pages
             Load();
         }
 
-        private void btnDel_Click(object sender, RoutedEventArgs e)
-        {
-            Load();
-        }
-
         private void DiscountBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Load();
@@ -135,9 +140,8 @@ namespace SalomKrasoti.Pages
 
         private void btnadnim_Click(object sender, RoutedEventArgs e)
         {
-            Frame _frame = new Frame();
-            Admin admin = new Admin(_frame);
-            admin.ShowDialog();
+            PageAdmin admin = new PageAdmin();
+            NavigationService.Navigate(admin);
         }
 
         private void btncreate_Click(object sender, RoutedEventArgs e)
@@ -148,35 +152,56 @@ namespace SalomKrasoti.Pages
 
         private void btnRed_Click(object sender, RoutedEventArgs e)
         {
-            PageEdit pageEdit = new PageEdit((Service)serviceGrid.SelectedItem);
-            NavigationService.Navigate(pageEdit);
+            if (adminCod == 1)
+            {
+                PageEdit pageEdit = new PageEdit((Service)serviceGrid.SelectedItem);
+                NavigationService.Navigate(pageEdit);
+            }
+            else
+            {
+                MessageBox.Show("У вас нет прав администратора");
+            }
+            
         }
 
         private void btnDel_Click_1(object sender, RoutedEventArgs e)
         {
-            if (serviceGrid.SelectedItems.Count > 0)
+            if (adminCod == 1)
             {
-                Service services = serviceGrid.SelectedItems[0] as Service;
-
-                if (services != null)
+                if (serviceGrid.SelectedItems.Count > 0)
                 {
-                    var context = helper.GetContext();
+                    Service services = serviceGrid.SelectedItems[0] as Service;
 
-                    // Удаляем клиента
-                    context.Service.Remove(services);
-                    context.SaveChanges();
-
-                    // Обновляем коллекцию в интерфейсе
-                    var serviceList = serviceGrid.ItemsSource as ObservableCollection<Service>;
-                    if (serviceList != null)
+                    if (services != null)
                     {
-                        serviceList.Remove(services); // Удаляем клиента из коллекции
-                    }
+                        var context = helper.GetContext();
+                        var srv = context.ClientService.Where(s => s.ServiceID == services.ID);
+                        if (srv.Any()) // Проверяем, есть ли записи для удаления
+                        {
+                            MessageBox.Show("У услуги есть записи, удаление невозможно");
+                        }
+                        else
+                        {
+                            context.Service.Remove(services);
+                            context.SaveChanges();
 
-                    MessageBox.Show("Удаление успешно выполнено");
-                    Load();
+                            // Обновляем коллекцию в интерфейсе
+                            var serviceList = serviceGrid.ItemsSource as ObservableCollection<Service>;
+                            if (serviceList != null)
+                            {
+                                serviceList.Remove(services); // Удаляем клиента из коллекции
+                            }
+
+                            MessageBox.Show("Удаление успешно выполнено");
+                            Load();
+                        }
+
+                    }
                 }
             }
+            else { MessageBox.Show("У вас нет прав администратора"); }
+            
+            
         }
 
         private void btncreatclient_Click(object sender, RoutedEventArgs e)
@@ -192,6 +217,12 @@ namespace SalomKrasoti.Pages
                 MessageBox.Show("Выберите услугу");
             }
             
+        }
+
+        private void btnUpcoming_Click(object sender, RoutedEventArgs e)
+        {
+            PageUpcomingEnt Ue = new PageUpcomingEnt();
+            NavigationService.Navigate(Ue);
         }
     }
 }

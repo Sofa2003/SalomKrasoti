@@ -1,0 +1,38 @@
+﻿<Page x:Class="SalomKrasoti.Pages.PageUpcomingEnt"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SalomKrasoti.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageUpcomingEnt">
+
+    <Grid>
+        <DataGrid Name="datagridClServ" AutoGenerateColumns="False" 
+               ItemsSource="{Binding ClientService}" 
+               Margin="10,10,10,113">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование услуги" Binding="{Binding Service.Title}" />
+                <DataGridTextColumn Header="Имя" Binding="{Binding Client.FirstName}" />
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Client.LastName}" />
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Client.Patronymic}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Client.Email}" />
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Client.Phone}" />
+                <DataGridTextColumn Header="Дата и время записи" Binding="{Binding StartTime}" />
+                <DataGridTemplateColumn Header="Осталось времени">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding RemainingTime}">
+                                <TextBlock.Foreground>
+                                    <Binding Path="RemainingTime" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnVixod" Content="Выход" HorizontalAlignment="Left" Margin="247,345,0,0" VerticalAlignment="Top" Height="43" Width="284" Click="btnVixod_Click"/>
+    </Grid>
+</Page>

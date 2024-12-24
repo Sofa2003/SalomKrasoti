@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SalomKrasoti.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,36 +14,47 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SalomKrasoti.Models;
+using System.Windows.Threading;
+using static SalomKrasoti.MainWindow;
 
-namespace SalomKrasoti
+namespace SalomKrasoti.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для PageUpcomingEnt.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PageUpcomingEnt : Page
     {
-        public MainWindow()
+        private List<ClientService> listClServ;
+        private DispatcherTimer timer;
+        public PageUpcomingEnt()
         {
             InitializeComponent();
-            frame.Content = new Pages.PageGlav(0);
+            listClServ = helper.GetContext().ClientService.ToList();
+            
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(30); // Устанавливаем интервал 30 секунд
+            timer.Tick += Timer_Tick; // Подписываемся на событие Tick
+            timer.Start(); // Запускаем таймер
+            Load();
         }
-        private void frame_LoadCompleted(object sender, NavigationEventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            Load();
+        }
+        public void Load()
         {
 
+            var currentDate = DateTime.Now; // Текущая дата и время
+            var twoDaysLater = currentDate.AddDays(2); // Дата через 2 дня
+
+            var serviceQuery = listClServ.Where(service => service.StartTime >= currentDate && service.StartTime <= twoDaysLater)
+                .OrderBy(service => service.StartTime)
+                .AsQueryable();
+
+            datagridClServ.ItemsSource = serviceQuery.ToList();
         }
-        public class helper
-        {
-            public static SalonKrasotiEntities ent;
-            public static SalonKrasotiEntities GetContext()
-            {
-                if (ent == null)
-                {
-                    ent = new SalonKrasotiEntities();
-                }
-                return ent;
-            }
-        }
+
+
         public class FirstCharacterConverter : IValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -65,5 +77,11 @@ namespace SalomKrasoti
             }
         }
 
+        private void btnVixod_Click(object sender, RoutedEventArgs e)
+        {
+            PageGlav pgv = new PageGlav(1);
+            NavigationService.Navigate(pgv);
+
+        }
     }
 }

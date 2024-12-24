@@ -19,10 +19,10 @@
             </ComboBox>
 
             <TextBlock Text="Дата:" FontWeight="Bold"/>
-            <DatePicker x:Name="dpServiceDate" SelectedDate="{Binding SelectedDate, Mode=TwoWay}"/>
+            <DatePicker x:Name="dpServiceDate" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" PreviewTextInput="dpServiceDate_PreviewTextInput"/>
 
             <TextBlock Text="Время начала (чч:мм):" FontWeight="Bold"/>
-            <TextBox x:Name="tbStartTime" TextChanged="tbStartTime_TextChanged"  />
+            <TextBox x:Name="tbStartTime" TextChanged="tbStartTime_TextChanged" PreviewTextInput="tbStartTime_PreviewTextInput"  />
 
             <Button Content="Сохранить запись" Click="btnSave_Click"/>
             <Button  x:Name="btnvixod" Content="Выйти" Click="btnvixod_Click"/>
