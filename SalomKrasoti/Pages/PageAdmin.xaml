@@ -11,7 +11,7 @@
     <Grid>
         <Button Content="Проверить" HorizontalAlignment="Left" Margin="183,212,0,0" VerticalAlignment="Top" Height="49" Width="205" Click="Button_Click_1"/>
         <TextBox x:Name = "TextBoxAdmin"  HorizontalAlignment="Left" Height="39" Margin="112,147,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="552"/>
-        <Button x:Name="btnBack" Content="Назад" HorizontalAlignment="Left" Margin="423,212,0,0" VerticalAlignment="Top" Height="49" Width="205" />
+        <Button x:Name="btnBack" Content="Назад" HorizontalAlignment="Left" Margin="423,212,0,0" VerticalAlignment="Top" Height="49" Width="205" Click="btnBack_Click" />
         <TextBlock HorizontalAlignment="Left" Margin="112,126,0,0" TextWrapping="Wrap" Text="Введите пароль" VerticalAlignment="Top"/>
     </Grid>
 </Page>

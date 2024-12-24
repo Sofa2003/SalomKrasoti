@@ -38,5 +38,11 @@ namespace SalomKrasoti.Pages
             }
 
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            PageGlav glc = new PageGlav(0);
+            NavigationService.Navigate(glc);
+        }
     }
 }

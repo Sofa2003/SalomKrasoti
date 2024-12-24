@@ -120,14 +120,15 @@ namespace SalomKrasoti.Pages
 
         private void dpServiceDate_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9:]");
+            Regex regex = new Regex("[^0-9.]");
             e.Handled = regex.IsMatch(e.Text);
+
         }
 
         private void tbStartTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9:]");
-            e.Handled = regex.IsMatch(e.Text);
+            Regex regex1 = new Regex("[^0-9:]");
+            e.Handled = regex1.IsMatch(e.Text);
         }
     }
 }
